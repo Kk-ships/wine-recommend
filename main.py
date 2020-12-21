@@ -11,7 +11,9 @@ tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', do_lo
 # Loading model and setting output hidden states flag to true
 model = DistilBertForSequenceClassification.from_pretrained( './model/', output_hidden_states=True )
 
+
 def text_to_embedding(tokenizer, model, input_text, device):
+    model.to(device)
     input_text = str(input_text)
     # Step 1 = Tokenization
     MAX_LEN = 128  # Max token length
