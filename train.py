@@ -34,11 +34,7 @@ def run():
     valid_data_loader = DataLoader( valid_dataset, batch_size=config.VALID_BATCH_SIZE, num_workers=4 )
 
     device = torch.device( config.DEVICE )
-    model = DistilBertForSequenceClassification.from_pretrained(
-        config.BERT_PATH,  # use 6 layer base Distil-BERT with uncased vocab
-        num_labels=config.NUM_LABELS,  # Linear regression unique points
-        output_attentions=False,  # Do not return attention weights
-        output_hidden_states=False )  # do not retun all hidden states
+    model = config.MODEL
     model.to( device )
 
     param_optimizer = list( model.named_parameters() )
