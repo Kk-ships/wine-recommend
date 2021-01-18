@@ -28,8 +28,8 @@ def run():
 
     message = st.text_area( "Enter Text", "Type Here .. (E.g. Vintage, woody, fruity, apple etc.)" )
     if st.button( "Get recommendations" ):
-        nlp_result = processing( message )
-        st.json( nlp_result )
+        processing( message )
+
 
 
 def get_embedding(user_input):
@@ -77,13 +77,12 @@ def processing(user_input):
     wines_recommended = dict( dict() )
     try:
         for i, row in enumerate( top_3_row_nums ):
-            wines_recommended[i + 1] = {'Name': train_df.iloc[row].title, 'Review': train_df.iloc[row].description,
-                                        'Review score': int( train_df.iloc[row].points ),
-                                        'Country of origin': df.iloc[row].country }
+            st.write(f'Name: {train_df.iloc[row].title} \n Review: {train_df.iloc[row].description} \n Review score: {int(train_df.iloc[row].points)} \n Country of origin: {df.iloc[row].country}')
     except AttributeError:
-        wines_recommended = { " I think I made a mistake somewhere. "}
+        print(" I think I made a mistake somewhere. ")
+        raise
 
-    return wines_recommended
+    return None
 
 
 if __name__ == '__main__':
